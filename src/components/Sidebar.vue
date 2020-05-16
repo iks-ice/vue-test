@@ -8,7 +8,6 @@
         </li>
       </router-link>
     </ul>
-    <router-view />
   </div>
 </template>
 

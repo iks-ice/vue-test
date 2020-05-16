@@ -6,7 +6,9 @@
     <nav>
       <Sidebar />
     </nav>
-    <main>Content</main>
+    <main>
+      <Content />
+    </main>
     <footer>
       <Footer />
     </footer>
@@ -17,23 +19,14 @@
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
-import axios from "axios";
+import Content from "./components/Content";
 export default {
   name: "App",
   components: {
     Header,
     Sidebar,
-    Footer
-  },
-  data() {
-    return {
-      users: []
-    };
-  },
-  created() {
-    axios
-      .get("https://api.github.com/users")
-      .then(res => (this.users = res.data));
+    Footer,
+    Content
   }
 };
 </script>
@@ -59,7 +52,7 @@ export default {
   grid-template-rows: 60px 1fr 60px;
   grid-template-columns: 10% 1fr;
   height: 100vh;
-  font-family: sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .text-center {
   text-align: center;
