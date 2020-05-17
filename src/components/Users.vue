@@ -1,24 +1,65 @@
 <template>
-  <div class="users-list">
-    <div v-for="({avatar_url, id, login}) in users" :key="id" class="card">
-      <img :src="avatar_url" alt="user" class="img" />
-      <div class="all-center">
-        <p>{{login}}</p>
+  <div>
+    <div class="users-list">
+      <div
+        v-for="({avatar_url, id, login}) in filteredUsers"
+        :key="id"
+        class="card"
+        @click="showInfo(login)"
+      >
+        <img :src="avatar_url" alt="user" class="img" />
+        <div class="all-center">
+          <p>{{login}}</p>
+        </div>
       </div>
     </div>
+    <UserInfo :user="user" :isLoading="isLoading" v-show="isShown" v-on:close="isShown=false" />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import UserInfo from "./UserInfo";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Users",
-  methods: {
-    ...mapActions(["fetchUsers"])
+  components: {
+    UserInfo
   },
-  computed: mapGetters(["users"]),
-  created() {
-    this.fetchUsers();
+  data() {
+    return {
+      isShown: false,
+      user: null,
+      isLoading: true
+    };
+  },
+  methods: {
+    ...mapActions(["fetchUsers"]),
+    showInfo(login) {
+      this.isShown = true;
+      this.getUser(login);
+    },
+    getUser: async function(login) {
+      this.isLoading = true;
+      const { data } = await axios.get(`https://api.github.com/users/${login}`);
+      this.user = data;
+      this.isLoading = false;
+    }
+  },
+  computed: {
+    ...mapGetters(["users", "searchString"]),
+    filteredUsers: function() {
+      if (this.searchString === "") {
+        return this.users;
+      } else {
+        return this.users.filter(
+          ({ login }) => login.toLowerCase().indexOf(this.searchString) !== -1
+        );
+      }
+    }
+  },
+  async created() {
+    await this.fetchUsers();
   }
 };
 </script>
@@ -45,5 +86,21 @@ export default {
 }
 .img {
   width: 100px;
+}
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+}
+.user-info {
+  background: white;
+  width: 70vw;
+  height: 60vh;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 </style>

@@ -65,6 +65,7 @@ nav {
 }
 main {
   grid-area: main;
+  overflow: auto;
 }
 footer {
   grid-area: footer;

@@ -24,8 +24,8 @@ export default {
         },
         {
           route: "/selected",
-          title: "Selected Users",
-          img: "fas fa-check-double"
+          title: "Favorite Users",
+          img: "fas fa-star"
         }
       ],
       active: 0

@@ -2,18 +2,31 @@
   <div class="wrapper">
     <div class="logo all-center">Vue SPA</div>
     <div class="all-center">
-      <input type="text" class="search" placeholder="Search for ..." v-model="value" />
+      <input
+        type="text"
+        class="search"
+        placeholder="Search for ..."
+        v-model="value"
+        @input="filter"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Header",
   data() {
     return {
       value: ""
     };
+  },
+  methods: {
+    ...mapActions(["setSearchString"]),
+    filter() {
+      this.setSearchString(this.value);
+    }
   }
 };
 </script>
