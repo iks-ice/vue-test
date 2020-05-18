@@ -28,7 +28,7 @@ export default {
           img: "fas fa-star"
         }
       ],
-      active: 0
+      active: null,
     };
   },
   methods: {

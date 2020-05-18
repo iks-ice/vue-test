@@ -5,12 +5,6 @@ import searchString from './modules/searchString'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
     users,
     searchString
