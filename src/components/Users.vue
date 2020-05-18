@@ -13,7 +13,12 @@
         </div>
       </div>
     </div>
-    <UserInfo :user="user" :isLoading="isLoading" v-show="isShown" v-on:close="isShown=false" />
+    <div v-if="isLoading" class="modal all-center">
+      <div class="preloader all-center">
+        Loading ...
+      </div>
+    </div>
+    <UserInfo v-else :user="user" :isLoading="isLoading" v-show="isShown" v-on:close="isShown=false" />
   </div>
 </template>
 
@@ -30,7 +35,7 @@ export default {
     return {
       isShown: false,
       user: null,
-      isLoading: true
+      isLoading: false
     };
   },
   methods: {
@@ -87,20 +92,12 @@ export default {
 .img {
   width: 100px;
 }
-.modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-}
-.user-info {
+.preloader {
   background: white;
   width: 70vw;
   height: 60vh;
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  font-size: 40px;
+  color: var(--primary-color);
 }
 </style>
