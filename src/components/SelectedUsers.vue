@@ -1,8 +1,8 @@
 <template>
-   <div v-if="filteredUsers.length > 0">
-     <div class="clear-btn" @click="removeAll">
-       Clear the list
-     </div>
+  <div v-if="filteredUsers.length > 0">
+    <div class="clear-btn" @click="removeAll">
+      Clear the list
+    </div>
     <div class="users-list">
       <div
         v-for="({avatar_url, id, login}) in filteredUsers"
