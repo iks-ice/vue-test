@@ -1,5 +1,8 @@
 <template>
    <div v-if="filteredUsers.length > 0">
+     <div class="clear-btn" @click="removeAll">
+       Clear the list
+     </div>
     <div class="users-list">
       <div
         v-for="({avatar_url, id, login}) in filteredUsers"
@@ -51,6 +54,10 @@
       removeFromFavorite(userId) {
         this.filteredUsers = this.selectedUsers.filter(({id}) => id !== userId);
         setSelectedUsers(this.filteredUsers);
+      },
+      removeAll() {
+        this.filteredUsers = [];
+        setSelectedUsers(this.filteredUsers);
       }
     }
   };
@@ -86,5 +93,18 @@
   }
   .img {
     width: 100px;
+  }
+  .clear-btn {
+    width: 200px;
+    margin: 50px auto;
+    padding: 16px 32px;
+    border-radius: 5px;
+    font-size: 24px;
+    background: tomato;
+    color: white;
+    transition: background .2s;
+  }
+  .clear-btn:hover  {
+    background: red;
   }
 </style>
