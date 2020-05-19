@@ -1,4 +1,5 @@
 const input = document.querySelector('input');
+input.focus();
 
 const cacheInput = () => {
     let cachedValue = '';

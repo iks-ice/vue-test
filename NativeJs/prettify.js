@@ -1,7 +1,3 @@
-const beuatify = number => {
-    const r = new Intl.NumberFormat('ua-Ua', { useGrouping: true })
-    return r.format(number);
-}
 
 const prettify = number => {
     let res = String(number);
@@ -25,4 +21,4 @@ const prettify = number => {
     return res +=`.${float || '00'}`;
 }
 
-console.log(prettify(1000000));
+console.log(prettify(1205630404.54));
